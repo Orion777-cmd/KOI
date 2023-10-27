@@ -1,12 +1,15 @@
 const http = require('http');
-import app from './app';
+const app = require('./app');
+const {loadPlanetsData} = require('./models/planets.model');
 
 const PORT = process.env.PORT || 8000; 
 
 const server = http.createServer(app);
 
-server.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`);
+loadPlanetsData().then(()=>{
+    server.listen(PORT, () => {
+        console.log(`server listening on port ${PORT}`);
+    })
 })
 
 

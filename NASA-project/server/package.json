@@ -4,7 +4,9 @@
   "description": "NASA ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "watch": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "csv-parse": "^5.5.2",
     "express": "^4.18.2"
   }
 }
