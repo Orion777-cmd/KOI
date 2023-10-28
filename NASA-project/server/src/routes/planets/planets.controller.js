@@ -1,11 +1,11 @@
 const express = require('express');
 
-const {planets} = require('../../models/planets.model');
+const {getHabitablePlanets} = require('../../models/planets.model');
 
-const getAllPlanets = (req, res) => {
-    return res.status(200).json(planets)
+const httpGetAllPlanets = (req, res) => {
+    return res.status(200).json(getHabitablePlanets())
 }
 
 module.exports = {
-    getAllPlanets
+    httpGetAllPlanets
 }

@@ -36,8 +36,10 @@ function isHabitablePlanet (planet){
         && planet['koi_prad'] < 1.6
 }
 
-
+const getHabitablePlanets = () => {
+    return results;
+}
 module.exports = {
     loadPlanetsData,
-    planets: results, 
+    getHabitablePlanets, 
 }
