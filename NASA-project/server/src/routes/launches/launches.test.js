@@ -39,31 +39,38 @@ describe('Test POST /launches', () => {
 
     test('it should catch missing required properties', async () => {
         const response = await request(app).post('/launches').send({
-            mission: 'USS Enterprise',
-            rocket: 'NCC 1701-D',
-            launchDate: 'January 4, 2028',
-        
-        
-        });
-        expect(response.statusCode).toBe(400);
+            launchDataWithoutDate
+    
+        })
+        .expect('Content-Type', /json/)
+        .expect(400);
+
+        expect(response.body).toStrictEqual({
+            error: 'Missing required launch property',
+        })
     })
 
     test('it should catch invalid dates', async () => {
-        const response = await request(app).post('/launches').send({
+        const response = await request(app)
+          .post('/launches')
+          .send({
             mission: 'USS Enterprise',
             rocket: 'NCC 1701-D',
             target: 'Kepler-62 f',
             launchDate: 'abiy biru',
-        
-        
+          })
+          .expect('Content-Type', /json/)
+          .expect(400);
+      
+        expect(response.body).toStrictEqual({
+          error: 'Invalid launch date',
         });
-        expect(response.statusCode).toBe(400);
-    })
+      });
 })
 
 describe('Test DELETE /launches', () => {
-    test('it should respond with 200 success',async () => {
-        const response = await request(app).delete('/launches/:100');
-        expect(response.statusCode).toBe(200);
-    })
-})
+    test('it should respond with 200 success', async () => {
+      const response = await request(app).delete('/launches/100');
+      expect(response.statusCode).toBe(200);
+    });
+  });
